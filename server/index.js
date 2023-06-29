@@ -16,7 +16,7 @@ const salt = bcrypt.genSaltSync(10);
 const secret = process.env.secret
 
 //---------------------------------------
-//            Middleware
+//            Middleware  
 //---------------------------------------
 app.use(cors({ origin: "https://gentle-heliotrope-985c5c.netlify.app", credentials: true }));
 app.use(express.json());
@@ -41,6 +41,12 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
+  const cookieOptions = {
+    domain: 'https://gentle-heliotrope-985c5c.netlify.app',
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    httpOnly: true,
+    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+};
   const user = await User.findOne({ username });
   if (user) {
     const result = bcrypt.compareSync(password, user.password);
@@ -48,7 +54,7 @@ app.post("/login", async (req, res) => {
       //we will return jsonwebtoken
       jwt.sign({ username, id: user._id }, secret, {}, (err, token) => {
         if (err) throw err;
-        res.cookie("token", token).json({
+        res.cookie("token", token,cookieOptions).json({
           id: user._id,
           username: user.username,
           likedPosts: user.likedPosts,
