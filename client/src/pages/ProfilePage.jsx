@@ -14,7 +14,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:3000/user/myposts/${userInfo.id}`, {
+    fetch(`https://cheap-blog-site.onrender.com/user/myposts/${userInfo.id}`, {
       method: "GET",
       credentials: "include",
     })
@@ -26,7 +26,7 @@ const ProfilePage = () => {
         setMyPosts(data);
       });
 
-    fetch(`http://localhost:3000/user/likedposts/${userInfo.id}`, {
+    fetch(`https://cheap-blog-site.onrender.com/user/likedposts/${userInfo.id}`, {
       method: "GET",
       credentials: "include",
     })

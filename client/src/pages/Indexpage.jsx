@@ -8,7 +8,7 @@ const Indexpage = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:3000/posts").then((posts) => {
+    fetch("https://cheap-blog-site.onrender.com/posts").then((posts) => {
       posts.json().then((posts) => {
         // console.log(posts);
         setPosts(posts);

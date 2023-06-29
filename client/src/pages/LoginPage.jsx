@@ -14,7 +14,7 @@ const LoginPage = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch("https://cheap-blog-site.onrender.com/login", {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: { "Content-Type": "application/json" },

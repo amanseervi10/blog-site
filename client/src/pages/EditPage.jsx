@@ -17,7 +17,7 @@ const EditPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:3000/post/${id}`).then((res) => {
+    fetch(`https://cheap-blog-site.onrender.com/post/${id}`).then((res) => {
       res.json().then((info) => {
         settitle(info.title);
         setsummary(info.summary);
@@ -71,7 +71,7 @@ const EditPage = () => {
         data = {secure_url:imageSrc};
     }
 
-    const response = await fetch(`http://localhost:3000/update/${id}`, {
+    const response = await fetch(`https://cheap-blog-site.onrender.com/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

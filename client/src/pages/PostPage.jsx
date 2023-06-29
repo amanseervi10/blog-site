@@ -13,7 +13,7 @@ const PostPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // fetch(`http://localhost:3000/user`, {
+    // fetch(`https://cheap-blog-site.onrender.com/user`, {
     //   method: "GET",
     //   credentials: "include",
     // })
@@ -25,7 +25,7 @@ const PostPage = () => {
     //     setUserInfo(stuff);
     //   });
 
-    fetch(`http://localhost:3000/post/${id}`).then((res) => {
+    fetch(`https://cheap-blog-site.onrender.com/post/${id}`).then((res) => {
       res.json().then((info) => {
         setPost(info);
       });
@@ -53,7 +53,7 @@ const PostPage = () => {
       setLike(false);
       userInfo.likedPosts.splice(userInfo.likedPosts.indexOf(post?._id), 1);
       //remove from liked posts
-      fetch(`http://localhost:3000/dislike/${id}`, {
+      fetch(`https://cheap-blog-site.onrender.com/dislike/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +67,7 @@ const PostPage = () => {
     } else {
       //add to liked posts
       userInfo?.likedPosts?.push(post?._id);
-      fetch(`http://localhost:3000/like/${id}`, {
+      fetch(`https://cheap-blog-site.onrender.com/like/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

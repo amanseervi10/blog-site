@@ -10,7 +10,7 @@ const Navbar = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch("http://localhost:3000/user", {
+    fetch("https://cheap-blog-site.onrender.com/user", {
       credentials: "include",
     }).then((res) => {
       if (res.ok) {
@@ -23,7 +23,7 @@ const Navbar = () => {
 
   const logout = () => {
     setLoading(true);
-    fetch("http://localhost:3000/logout", {
+    fetch("https://cheap-blog-site.onrender.com/logout", {
       credentials: "include",
       method: "POST",
     }).then((response) => {

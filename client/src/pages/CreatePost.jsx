@@ -53,7 +53,7 @@ const CreatePost = () => {
 
     // console.log(data);
 
-    const response = await fetch("http://localhost:3000/uploadPost", {
+    const response = await fetch("https://cheap-blog-site.onrender.com/uploadPost", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
