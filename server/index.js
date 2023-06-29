@@ -18,7 +18,7 @@ const secret = process.env.secret
 //---------------------------------------
 //            Middleware
 //---------------------------------------
-app.use(cors({ origin: "*", credentials: true }));
+app.use(cors({ origin: "https://gentle-heliotrope-985c5c.netlify.app/", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
