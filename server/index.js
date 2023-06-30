@@ -205,7 +205,6 @@ app.put("/update/:id", async (req, res) => {
 });
 
 app.delete("/post/delete/:id", async (req, res) => {
-  console.log("reached here to update");
   const { token } = req.cookies;
   const { id } = req.params;
 
@@ -214,9 +213,7 @@ app.delete("/post/delete/:id", async (req, res) => {
     const post = await Post.findById(id);
     const result = post.author.toString() === decoded.id.toString();
     if (!result) return res.status(401).json("Not Authorized");
-    console.log(post);
     await Post.deleteOne({ _id: id.toString() });
-    console.log("deleted");
     res.json("ok");
   });
 });
