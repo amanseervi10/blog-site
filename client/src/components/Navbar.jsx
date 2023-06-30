@@ -4,10 +4,13 @@ import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../UserContext";
 import "./nav.css";
 import { HashLoader } from "react-spinners";
+import ThemeToggle from "./ThemeToggle";
+import { ThemeContext } from "../ThemeContext";
 
 const Navbar = () => {
   const { userInfo, setUserInfo } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
+  const {theme} =useContext(ThemeContext);
   const navigate = useNavigate();
   useEffect(() => {
     fetch("https://cheap-blog-site.onrender.com/user", {
@@ -43,25 +46,26 @@ const Navbar = () => {
         </div>
       )}
       <header>
-        <Link to="/" className="logo">
-          CheapBlogSite
+        <Link to="/" className={`logo ${theme}`}>
+          CheapReddit
         </Link>
         <nav>
+          <ThemeToggle />
           {username && (
             <>
-              <NavLink to="/create-post">Create Post</NavLink>
+              <NavLink to="/create-post" className={`${theme}`}>Create Post</NavLink>
               <button className="button-27" role="button" onClick={logout}>
                 <a className="logout">
                   Logout
                 </a>
               </button>
-              <NavLink to={`/user/${userInfo.id}`}>{username}</NavLink>
+              <NavLink to={`/user/${userInfo.id}`} className={`${theme}`}>{username}</NavLink>
             </>
           )}
           {!username && (
             <>
-              <NavLink to="/login">Login</NavLink>
-              <NavLink to="/register">Register</NavLink>
+              <NavLink to="/login" className={`${theme}`}>Login</NavLink>
+              <NavLink to="/register" className={`${theme}`}>Register</NavLink>
             </>
           )}
         </nav>

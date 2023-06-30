@@ -1,5 +1,15 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --text-light: #222;
+  --text-dark: #fff;
+
+  --bg-light: #fff;
+  --bg-dark: #222;
 }
 
 main {
@@ -74,4 +84,16 @@ header nav {
   justify-content: center;
   align-items: center;
   margin: 100px auto;
+}
+
+.light-theme {
+  color: var(--text-light);
+  background-color: var(--bg-light);
+  transition: background 0.2s linear;
+}
+
+.dark-theme {
+  color: var(--text-dark);
+  background-color: var(--bg-dark);
+  transition: background 0.2s linear;
 }
