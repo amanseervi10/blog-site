@@ -1,5 +1,5 @@
 const express = require("express");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -13,12 +13,14 @@ const User = require("./models/User");
 const Post = require("./models/Post");
 
 const salt = bcrypt.genSaltSync(10);
-const secret = process.env.secret
+const secret = process.env.secret;
 
 //---------------------------------------
-//            Middleware  
+//            Middleware
 //---------------------------------------
-app.use(cors({ origin: "https://cheap-blog-site.netlify.app", credentials: true }));
+app.use(
+  cors({ origin: "https://cheap-blog-site.netlify.app", credentials: true })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -48,7 +50,7 @@ app.post("/login", async (req, res) => {
       //we will return jsonwebtoken
       jwt.sign({ username, id: user._id }, secret, {}, (err, token) => {
         if (err) throw err;
-        res.cookie("token", token,{ sameSite: 'none', secure: true }).json({
+        res.cookie("token", token, { sameSite: "none", secure: true }).json({
           id: user._id,
           username: user.username,
           likedPosts: user.likedPosts,
@@ -67,10 +69,10 @@ app.post("/logout", (req, res) => {
 app.get("/user", (req, res) => {
   const { token } = req.cookies;
 
-  jwt.verify(token, secret, {}, async(err, decoded) => {
+  jwt.verify(token, secret, {}, async (err, decoded) => {
     if (err) return res.status(401).json(err);
     // console.log("reached for userinfo")
-    const user=await User.findById(decoded.id);
+    const user = await User.findById(decoded.id);
     // console.log(user);
     res.json(user);
   });
@@ -92,7 +94,7 @@ app.get("/user/likedposts/:id", async (req, res) => {
   jwt.verify(token, secret, {}, async (err, decoded) => {
     if (err) return res.status(401).json(err);
     const user = await User.findById(decoded.id);
-    let posts=[];
+    let posts = [];
 
     for (let i = 0; i < user.likedPosts.length; i++) {
       posts.push(await Post.findById(user.likedPosts[i]));
@@ -202,10 +204,25 @@ app.put("/update/:id", async (req, res) => {
   });
 });
 
+app.delete("/post/delete/:id", async (req, res) => {
+  console.log("reached here to update");
+  const { token } = req.cookies;
+  const { id } = req.params;
+
+  jwt.verify(token, secret, {}, async (err, decoded) => {
+    if (err) return res.status(401).json(err);
+    const post = await Post.findById(id);
+    const result = post.author.toString() === decoded.id.toString();
+    if (!result) return res.status(401).json("Not Authorized");
+    console.log(post);
+    await Post.deleteOne({ _id: id.toString() });
+    console.log("deleted");
+    res.json("ok");
+  });
+});
+
 mongoose
-  .connect(
-    process.env.MONGODB_URI
-  )
+  .connect(process.env.MONGODB_URI)
   .then((result) => {
     console.log("Connected to DB");
     app.listen(3000);
