@@ -8,9 +8,9 @@ const ThemeToggle = () => {
     <div className="checkbox-div">
       <input type="checkbox" class="checkbox" id="checkbox" onClick={toggleTheme}/>
       <label for="checkbox" class="checkbox-label">
-        <i class="fas"></i>
-        <i class="fas"></i>
-        <span class="ball"></span>
+        <i className="fas"></i>
+        <i className="fas"></i>
+        <span className="ball"></span>
       </label>
     </div>
   );
