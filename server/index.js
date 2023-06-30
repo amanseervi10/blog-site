@@ -69,9 +69,9 @@ app.get("/user", (req, res) => {
 
   jwt.verify(token, secret, {}, async(err, decoded) => {
     if (err) return res.status(401).json(err);
-    console.log("reached for userinfo")
+    // console.log("reached for userinfo")
     const user=await User.findById(decoded.id);
-    console.log(user);
+    // console.log(user);
     res.json(user);
   });
 });
@@ -108,14 +108,14 @@ app.get("/user/likedposts/:id", async (req, res) => {
 app.put("/like/:id", async (req, res) => {
   const { token } = req.cookies;
   const { id } = req.params;
-  console.log("reached to like here");
+  // console.log("reached to like here");
 
   jwt.verify(token, secret, {}, async (err, decoded) => {
     if (err) return res.status(401).json(err);
     const user = await User.findById(decoded.id);
     const likedPosts = user.likedPosts;
     likedPosts.push(id);
-    console.log(likedPosts);
+    // console.log(likedPosts);
     // //update the user
     await User.findOneAndUpdate(
       { _id: decoded.id.toString() },
@@ -177,14 +177,14 @@ app.get("/posts", async (req, res) => {
 });
 
 app.get("/post/:id", async (req, res) => {
-  console.log("reached here");
+  // console.log("reached here");
   const { id } = req.params;
   const post = await Post.findById(id).populate("author", ["username"]);
   res.json(post);
 });
 
 app.put("/update/:id", async (req, res) => {
-  console.log("reached here to update");
+  // console.log("reached here to update");
   const { title, summary, imageUrl, content } = req.body;
   const { token } = req.cookies;
   const { id } = req.params;
