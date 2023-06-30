@@ -44,7 +44,6 @@ const PostPage = () => {
   }, [post]);
 
   const likebutton = () => {
-    // console.log(userInfo);
     if (userInfo?.id === undefined) {
       alert("Please login to like posts");
       navigate("/login");
