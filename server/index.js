@@ -42,10 +42,8 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const cookieOptions = {
-    domain: 'https://gentle-heliotrope-985c5c.netlify.app',
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    httpOnly: true,
-    secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+    SameSite: "None",
+    secure: true,
 };
   const user = await User.findOne({ username });
   if (user) {
@@ -121,6 +119,7 @@ app.put("/like/:id", async (req, res) => {
     const user = await User.findById(decoded.id);
     const likedPosts = user.likedPosts;
     likedPosts.push(id);
+    console.log(likedPosts);
     // //update the user
     await User.findOneAndUpdate(
       { _id: decoded.id.toString() },
