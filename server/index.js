@@ -41,10 +41,6 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const cookieOptions = {
-    SameSite: "None",
-    secure: true,
-};
   const user = await User.findOne({ username });
   if (user) {
     const result = bcrypt.compareSync(password, user.password);
@@ -52,7 +48,7 @@ app.post("/login", async (req, res) => {
       //we will return jsonwebtoken
       jwt.sign({ username, id: user._id }, secret, {}, (err, token) => {
         if (err) throw err;
-        res.cookie("token", token,cookieOptions).json({
+        res.cookie("token", token,{ sameSite: 'none', secure: true }).json({
           id: user._id,
           username: user.username,
           likedPosts: user.likedPosts,
