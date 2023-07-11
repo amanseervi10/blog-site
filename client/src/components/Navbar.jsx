@@ -47,7 +47,7 @@ const Navbar = () => {
       )}
       <header>
         <Link to="/" className={`logo ${theme}`}>
-          CheapReddit
+          YodaBlog
         </Link>
         <nav>
           <ThemeToggle />
