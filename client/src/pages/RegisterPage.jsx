@@ -1,11 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import {useNavigate} from "react-router-dom";
 
 const RegisterPage = () => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const navigate=useNavigate();
+
+  useEffect(()=>{
+    alert("Dummy Credentials can be used if wanted to directly login.                     Username: aman Password: aman")
+  },[])
 
   const submitHandler=async(e)=>{
     e.preventDefault();

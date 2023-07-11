@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext,useEffect } from "react";
 import "./login.css";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
@@ -10,6 +10,10 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const { userInfo, setUserInfo } = useContext(UserContext);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    alert("Dummy Credentials can be used if wanted.                                   Username: aman Password: aman")
+  },[])
 
   const submitHandler = async (e) => {
     e.preventDefault();
